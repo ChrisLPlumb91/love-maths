@@ -41,15 +41,16 @@ function checkAnswer() {
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
-    if (isCorrect) {
+    if (isCorrect) { 
         alert('Hey! You got it right! :D');
+        incrementScore();
     } else {
         alert(`Awwww... You answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}`);
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]);
 }
-
 
 /**
  * Gets the operands (the numbers) and the operator (plus, minus, etc)
@@ -68,12 +69,17 @@ function calculateCorrectAnswer() {
     }
 }
 
+/** 
+ * Gets the current score from the DOM and increments it by 1. 
+ */
 function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById('score').innerText);
+    document.getElementById('score').innerText = ++oldScore;
 }
 
 function incrementWrongAnswer() {
-
+    let wrongAnswer = parseInt(document.getElementById('incorrect').innerText);
+    document.getElementById('incorrect').innerText = ++wrongAnswer;
 }
 
 function displayAdditionQuestion(operand1, operand2) {
@@ -82,10 +88,14 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = '+';
 }
 
-function displaySubtractionQuestion() {
-
+function displaySubtractionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = '-';
 }
 
-function displayMultiplyQuestion() {
-
+function displayMultiplyQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = 'x';
 }
